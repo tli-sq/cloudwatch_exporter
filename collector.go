@@ -28,6 +28,7 @@ type cwCollectorTemplate struct {
 type cwCollector struct {
 	Region            string
 	Target            string
+	AssumeRole        string
 	ScrapeTime        prometheus.Gauge
 	ErroneousRequests prometheus.Counter
 	Template          *cwCollectorTemplate
@@ -104,8 +105,9 @@ func NewCwCollector(target string, taskName string, region string) (*cwCollector
 	}
 
 	return &cwCollector{
-		Region: region,
-		Target: target,
+		Region:     region,
+		Target:     target,
+		AssumeRole: task.AssumeRole,
 		ScrapeTime: prometheus.NewGauge(prometheus.GaugeOpts{
 			Name: "cloudwatch_exporter_scrape_duration_seconds",
 			Help: "Time this CloudWatch scrape took, in seconds.",

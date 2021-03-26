@@ -28,6 +28,7 @@ type Task struct {
 	Name          string   `yaml:"name"`
 	DefaultRegion string   `yaml:"default_region,omitempty"`
 	Metrics       []Metric `yaml:"metrics"`
+	AssumeRole    string   `yaml:"role_arn"`
 }
 
 type Settings struct {
